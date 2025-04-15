@@ -81,21 +81,31 @@ function goToPrevSlide() {
 
 function handleSwipe() {
   let startX, startY;
+
   const carousel = document.querySelector(".carousel");
-  
+
   carousel.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
   });
 
   carousel.addEventListener("touchend", (e) => {
-    if (!e.changedTouches[0]) return;
     const deltaX = e.changedTouches[0].clientX - startX;
     const deltaY = e.changedTouches[0].clientY - startY;
-    const threshold = 30;
 
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
-      deltaX < 0 ? goToNextSlide() : goToPrevSlide();
+    const orientation = window.innerWidth > window.innerHeight ? "horizontal" : "vertical";
+    const threshold = 30; // sensitivity
+
+    if (orientation === "horizontal") {
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX < -50) goToNextSlide();
+        else if (deltaX > 50) goToPrevSlide();
+      }
+    } else {
+      if (Math.abs(deltaY) > threshold) {
+        if (deltaY < -50) goToNextSlide();
+        else if (deltaY > 50) goToPrevSlide();
+      }
     }
   });
 }

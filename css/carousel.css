@@ -53,6 +53,15 @@
   transition: transform 0.6s ease-in-out;
 }
 
+.carousel-track.horizontal {
+  flex-direction: row;
+}
+
+.carousel-track.vertical {
+  flex-direction: column;
+}
+
+
 /* Single carousel item */
 .carousel-item {
   position: relative;
