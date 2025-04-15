@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>A BIGGER CIRCLE</title>
     <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/carousel.css"/>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.ico">
   </head>
      <body>
       <header>
         <h1 id="page-title" class="visually-hidden">A Bigger Circle</h1>
       </header>
       <main class="container">
-      <div class="cursor"></div>
-        <!-- Left Section -->
+          <!-- Left Section -->
         <section class="left">
           <div class="inner-container">
             <div class="left-text parallax" data-depth="0.8">
@@ -30,12 +31,12 @@
             <div class="carousel" id="content-carousel" data-lazy="true">
               <div class="carousel-track" data-src="path/to/heavy-content.html"></div>
             </div>
+            <div class="button-container"> 
+              <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
+              <button class="carousel-btn next" aria-label="Next slide">›</button>
+            </div>
           </div>
         
-          <div class="button-container"> 
-            <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
-            <button class="carousel-btn next" aria-label="Next slide">›</button>
-          </div>
         </section>
       </main>
     <!-- Scripts -->

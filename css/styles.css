@@ -118,67 +118,6 @@ html, body {
     margin-top: 20px;
 }
 
-/* button container */
-.button-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 5;
-    display: flex;
-    gap: 10px;
-}
-
-.carousel-btn {
-    background: var(--pink);
-    color: var(--secondary);
-    border: none;
-    font-size: 1.5rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-/* Carousel Styles */
-.carousel-container {
-    position: relative;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 5%;
-    box-sizing: border-box;
-}
-
-.carousel {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.carousel-track {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    transition: transform 0.6s ease-in-out;
-}
-
-.carousel-item {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
-.carousel-item .background {
-    position: absolute;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .container {
@@ -187,18 +126,5 @@ html, body {
     .left, .right {
         flex: 1 1 50%;
     }
-    .button-container {
-        top: 5px;
-        right: 5px;
-    }
-    .carousel-media {
-        max-width: 90%; /* Adjust the max width for smaller screens */
-        max-height: 90%; /* Adjust the max height for smaller screens */
-    }
 }
 
-@media (hover: none) {
-    .button-container {
-        display: none;
-    }
-}

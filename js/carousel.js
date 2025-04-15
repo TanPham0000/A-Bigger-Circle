@@ -4,7 +4,7 @@ let currentSlide = 0;
 let data = [];
 
 function fetchCarouselData() {
-  fetch("./carousel_data.json")
+  fetch("/carousel_data.json")
     .then((response) => response.json())
     .then((json) => {
       data = json;
@@ -26,7 +26,7 @@ function renderCarouselItems() {
 
     if (item.type === "video") {
       slide.innerHTML = `
-        <video class="background" autoplay loop muted playsinline>
+        <video class="carousel-content" autoplay loop muted playsinline>
           <source src="${item.background}" type="video/mp4">
         </video>
         <a href="${item.clickout}" target="_blank" rel="noopener noreferrer">
@@ -35,27 +35,38 @@ function renderCarouselItems() {
       `;
     } else {
       slide.innerHTML = `
-        <img class="background" src="${item.background}" alt="Carousel image ${index + 1}">
+        <img class="carousel-content" src="${item.background}" alt="Carousel image ${index + 1}">
         <a href="${item.clickout}" target="_blank" rel="noopener noreferrer">
           <div class="overlay-text">${item.text}</div>
         </a>
       `;
     }
-
     track.appendChild(slide);
   });
 }
 
-document.querySelector(".carousel-btn.next").addEventListener("click", goToNextSlide);
-document.querySelector(".carousel-btn.prev").addEventListener("click", goToPrevSlide);
-
 function updateSlide() {
   const track = document.querySelector(".carousel-track");
+  const slides = track.querySelectorAll(".carousel-item");
   const orientation = window.innerWidth > window.innerHeight ? "horizontal" : "vertical";
+  
   const translate = orientation === "horizontal"
-    ? `translateY(-${currentSlide * 100}%)`
-    : `translateX(-${currentSlide * 100}%)`;
+    ? `translateX(-${currentSlide * 100}%)`
+    : `translateY(-${currentSlide * 100}%)`;
+
   track.style.transform = translate;
+
+  slides.forEach((slide, index) => {
+    if (data.length === 0) return;
+    const video = slide.querySelector("video");
+      if (index === currentSlide) {
+      slide.classList.add("active");
+      if (video) video.play();
+    } else {
+      slide.classList.remove("active");
+      if (video) video.pause();
+    }
+  });
 }
 
 function goToNextSlide() {
@@ -70,22 +81,21 @@ function goToPrevSlide() {
 
 function handleSwipe() {
   let startX, startY;
-
-  document.querySelector(".carousel").addEventListener("touchstart", (e) => {
+  const carousel = document.querySelector(".carousel");
+  
+  carousel.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
   });
 
-  document.querySelector(".carousel").addEventListener("touchend", (e) => {
+  carousel.addEventListener("touchend", (e) => {
+    if (!e.changedTouches[0]) return;
     const deltaX = e.changedTouches[0].clientX - startX;
     const deltaY = e.changedTouches[0].clientY - startY;
+    const threshold = 30;
 
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      if (deltaX < -50) goToNextSlide();
-      else if (deltaX > 50) goToPrevSlide();
-    } else {
-      if (deltaY < -50) goToNextSlide();
-      else if (deltaY > 50) goToPrevSlide();
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
+      deltaX < 0 ? goToNextSlide() : goToPrevSlide();
     }
   });
 }
@@ -94,8 +104,11 @@ function setupCarousel() {
   fetchCarouselData();
   handleSwipe();
 
-  // Optional: autoplay every 15s
-  setInterval(goToNextSlide, 45000);
+  // Optional: autoplay every 50s
+  setInterval(goToNextSlide, 50000);
 }
+
+document.querySelector(".carousel-btn.next").addEventListener("click", goToNextSlide);
+document.querySelector(".carousel-btn.prev").addEventListener("click", goToPrevSlide);
 
 setupCarousel();
