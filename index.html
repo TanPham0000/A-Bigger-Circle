@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>A BIGGER CIRCLE</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+  </head>
+     <body>
+      <header>
+        <h1 id="page-title" class="visually-hidden">A Bigger Circle</h1>
+      </header>
+      <main class="container">
+      <div class="cursor"></div>
+        <!-- Left Section -->
+        <section class="left">
+          <div class="inner-container">
+            <div class="left-text parallax" data-depth="0.8">
+              <img src="assets/logo.svg" alt="A Bigger Circle Logo" class="logo"/>
+              <p>WE'RE MAKING</p>
+              <p>CONVERSATION</p>
+              <p class="regular">Stay tuned for more</p>
+            </div>
+          </div>
+        </section>
+  
+        <!-- Right Section -->
+        <section class="right">
+          <div class="carousel-container">
+            <div class="carousel" id="content-carousel" data-lazy="true">
+              <div class="carousel-track" data-src="path/to/heavy-content.html"></div>
+            </div>
+          </div>
+        
+          <div class="button-container"> 
+            <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
+            <button class="carousel-btn next" aria-label="Next slide">›</button>
+          </div>
+        </section>
+      </main>
+    <!-- Scripts -->
+       <script type="module" src="js/carousel.js"></script>
+       <script src="js/parallax.js"></script>
+     </body>
+</html>

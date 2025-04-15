@@ -1,0 +1,14 @@
+[
+  {
+    "type": "video",
+    "background": "assets/video/video.mp4"
+  },
+  {
+    "type": "image",
+    "background": "assets/carousel/slide1.jpg"
+  },
+  {
+    "type": "image",
+    "background": "assets/carousel/slide1.jpg"
+  }
+]
