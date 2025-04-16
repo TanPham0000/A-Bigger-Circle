@@ -16,6 +16,29 @@ function handleOrientation(event) {
       el.style.transform = `translate3d(${moveX * depth}px, ${moveY * depth}px, 0)`;
     });
   }
+
+  if (isMobile && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    document.querySelector('#enableMotionButton').addEventListener('click', () => {
+        DeviceOrientationEvent.requestPermission()
+            .then(response => {
+                if (response === 'granted') {
+                    window.addEventListener("deviceorientation", (event) => {
+                        const x = event.gamma / 45;
+                        const y = event.beta / 45;
+                        applyParallax(x, y);
+                    }, true);
+                }
+            })
+            .catch(console.error);
+    });
+} else if (isMobile && window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", (event) => {
+        const x = event.gamma / 45;
+        const y = event.beta / 45;
+        applyParallax(x, y);
+    }, true);
+}
+
   
   if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", handleOrientation, true);
