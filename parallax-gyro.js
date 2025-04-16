@@ -45,4 +45,3 @@ function handleOrientation(event) {
   } else {
     console.log("DeviceOrientation is not supported.");
   }
-  

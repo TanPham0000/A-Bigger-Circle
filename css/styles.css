@@ -39,6 +39,7 @@ html, body {
     align-items: center;
     font-family: 'Obviously Regular', sans-serif;
 }
+
 /* Important dont remove for accesibility */
 .visually-hidden {
     position: absolute;
@@ -119,6 +120,24 @@ html, body {
     text-transform: none;
     font-size: 13px;
     margin-top: 20px;
+}
+
+a {
+    font-family: 'Obviously Condensed Bold', sans-serif;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--secondary);
+    box-shadow: 0 4px 20px rgba(69, 0, 158, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: var(--primary);
+    color: var(--secondary);
 }
 
 /* Responsive */
