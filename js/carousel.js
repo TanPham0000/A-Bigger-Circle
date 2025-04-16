@@ -1,124 +1,52 @@
-// js/carousel.js
+let current = 0;
 
-let currentSlide = 0;
-let data = [];
+function update() {
+  const track = document.querySelector('.track');
+  const total = document.querySelectorAll('.slide').length;
+  const isMobile = window.innerWidth < 768;
 
-function fetchCarouselData() {
-  fetch("/carousel_data.json")
-    .then((response) => response.json())
-    .then((json) => {
-      data = json;
-      renderCarouselItems();
-      updateSlide();
-    })
-    .catch((error) => console.error("Error loading carousel data:", error));
+  const slideWidth = isMobile ? window.innerWidth : window.innerWidth / 2;
+  const translateValue = `translateX(-${current * slideWidth}px)`;
+  track.style.transform = translateValue;
 }
 
-// Updated renderCarouselItems() function
-function renderCarouselItems() {
-  const track = document.querySelector(".carousel-track");
-  track.innerHTML = "";
-
-  data.forEach((item, index) => {
-    const slide = document.createElement("div");
-    slide.className = "carousel-item";
-    slide.setAttribute("data-index", index);
-
-    if (item.type === "video") {
-      slide.innerHTML = `
-        <video class="carousel-content" autoplay loop muted playsinline>
-          <source src="${item.background}" type="video/mp4">
-        </video>
-        <a href="${item.clickout}" target="_blank" rel="noopener noreferrer">
-          <div class="overlay-text">${item.text}</div>
-        </a>
-      `;
-    } else {
-      slide.innerHTML = `
-        <img class="carousel-content" src="${item.background}" alt="Carousel image ${index + 1}">
-        <a href="${item.clickout}" target="_blank" rel="noopener noreferrer">
-          <div class="overlay-text">${item.text}</div>
-        </a>
-      `;
-    }
-    track.appendChild(slide);
-  });
+function next() {
+  const total = document.querySelectorAll('.slide').length;
+  current = (current + 1) % total;
+  update();
 }
 
-function updateSlide() {
-  const track = document.querySelector(".carousel-track");
-  const slides = track.querySelectorAll(".carousel-item");
-  const orientation = window.innerWidth > window.innerHeight ? "horizontal" : "vertical";
-  
-  const translate = orientation === "horizontal"
-    ? `translateX(-${currentSlide * 100}%)`
-    : `translateY(-${currentSlide * 100}%)`;
-
-  track.style.transform = translate;
-
-  slides.forEach((slide, index) => {
-    if (data.length === 0) return;
-    const video = slide.querySelector("video");
-      if (index === currentSlide) {
-      slide.classList.add("active");
-      if (video) video.play();
-    } else {
-      slide.classList.remove("active");
-      if (video) video.pause();
-    }
-  });
+function prev() {
+  const total = document.querySelectorAll('.slide').length;
+  current = (current - 1 + total) % total;
+  update();
 }
 
-function goToNextSlide() {
-  currentSlide = (currentSlide + 1) % data.length;
-  updateSlide();
+function updateTrackSize() {
+  const track = document.querySelector('.track');
+  const total = document.querySelectorAll('.slide').length;
+  const isMobile = window.innerWidth < 768;
+
+  const slideWidth = isMobile ? window.innerWidth : window.innerWidth / 2;
+  track.style.width = `${slideWidth * total}px`;
 }
 
-function goToPrevSlide() {
-  currentSlide = (currentSlide - 1 + data.length) % data.length;
-  updateSlide();
-}
+let startX;
 
-function handleSwipe() {
-  let startX, startY;
+document.querySelector('.carousel').addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+});
 
-  const carousel = document.querySelector(".carousel");
+document.querySelector('.carousel').addEventListener('touchend', e => {
+  let dx = e.changedTouches[0].clientX - startX;
+  if (dx < -50) next();
+  if (dx > 50) prev();
+});
 
-  carousel.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-  });
+window.addEventListener('resize', () => {
+  updateTrackSize();
+  update();
+});
 
-  carousel.addEventListener("touchend", (e) => {
-    const deltaX = e.changedTouches[0].clientX - startX;
-    const deltaY = e.changedTouches[0].clientY - startY;
-
-    const orientation = window.innerWidth > window.innerHeight ? "horizontal" : "vertical";
-    const threshold = 30; // sensitivity
-
-    if (orientation === "horizontal") {
-      if (Math.abs(deltaX) > threshold) {
-        if (deltaX < -50) goToNextSlide();
-        else if (deltaX > 50) goToPrevSlide();
-      }
-    } else {
-      if (Math.abs(deltaY) > threshold) {
-        if (deltaY < -50) goToNextSlide();
-        else if (deltaY > 50) goToPrevSlide();
-      }
-    }
-  });
-}
-
-function setupCarousel() {
-  fetchCarouselData();
-  handleSwipe();
-
-  // Optional: autoplay every 50s
-  setInterval(goToNextSlide, 50000);
-}
-
-document.querySelector(".carousel-btn.next").addEventListener("click", goToNextSlide);
-document.querySelector(".carousel-btn.prev").addEventListener("click", goToPrevSlide);
-
-setupCarousel();
+updateTrackSize();
+update();

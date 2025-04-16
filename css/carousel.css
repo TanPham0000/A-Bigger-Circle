@@ -1,43 +1,3 @@
-/* Button container for carousel controls */
-.button-container {
-  position: absolute;
-  bottom: 20px;       /* Push to the bottom */
-  left: 50%;          /* Center horizontally */
-  transform: translateX(-50%);  /* Perfectly center */
-  z-index: 5;
-  display: flex;
-  gap: 15px;
-}
-
-.carousel-btn {
-  background: var(--pink);
-  color: var(--secondary);
-  border: none;
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.carousel-btn:hover {
-  background: var(--secondary);
-  color: var(--pink);
-  transition-duration: 30ms;
-}
-
-/* Carousel Container */
-.carousel-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 5%;
-  box-sizing: border-box;
-  border-radius: 10px;
-}
-
 .carousel {
   position: relative;
   width: 100%;
@@ -45,74 +5,135 @@
   overflow: hidden;
 }
 
-/* Track holding the slides */
-.carousel-track {
+.track {
   display: flex;
-  height: 100%;
-  width: 100%;
-  transition: transform 0.6s ease-in-out;
-}
-
-.carousel-track.horizontal {
   flex-direction: row;
+  height: 100%;
+  width: fit-content;
+  transform: translateX(0);
+  transition: transform 0.8s ease;
 }
 
-.carousel-track.vertical {
-  flex-direction: column;
-}
-
-
-/* Single carousel item */
-.carousel-item {
-  position: relative;
+.slide {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* Background media inside carousel item */
-.carousel-item .carousel-content {
-  position: absolute;
-  border-radius: inherit; /* inherit from parent */
-  border-radius: inherit;
-  height: 100%;
-  object-fit: contain;
-  user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;  
-  z-index: 1;
-}
-
-/* Optional: overlay text positioning
-.overlay-text {
-  position: relative;
-  display: flex;
-  justify-content: left;
-  z-index: 2;
-  color: var(--secondary);
-  background: rgba(0, 0, 0, 0.4);
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
+  flex-direction: column;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 50vw; /* Desktop default */
 }
-*/
 
+.slide img,
+.slide video {
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(69, 0, 158, 0.3);
+}
+
+figcaption {
+  position: relative;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: 1rem;
+  background: rgba(0,0,0,0.5);
+  padding: 6px 12px;
+  border-radius: 5px;
+  max-width: 80%;
+  word-break: break-word;
+}
+
+/* Buttons */
+
+.buttons {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: fit-content;
+  gap: 15px;
+}
+
+button {
+  background: var(--accent, #ff4081);
+  color: var(--secondary, #fff);
+  border: none;
+  font-size: 2rem;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  width: 40px;
+  box-shadow: 
+    inset 0 1px 0 0 #f4f4f4,
+    0 1px 0 0 #efefef,
+    0 2px 0 0 #ececec,
+    0 4px 0 0 #e0e0e0,
+    0 5px 0 0 #dedede,
+    0 6px 0 0 #dcdcdc,
+    0 7px 0 0 #cacaca,
+    0 7px 8px 0 #cecece;
+    transition: transform 50ms ease;
+} 
+
+button:hover {
+  transform: translateY(4px);
+  box-shadow: 
+    inset 0 1px 0 0 #f4f4f4,
+    0 1px 0 0 #efefef,
+    0 1px 0 0 #ececec,
+    0 2px 0 0 #e0e0e0,
+    0 2px 0 0 #dedede,
+    0 3px 0 0 #dcdcdc,
+    0 4px 0 0 #cacaca,
+    0 4px 6px 0 #cecece;
+}
+
+button:active {
+  transform: translateY(2px);
+  background-color: var(--accent-dark, #e91e63);
+  box-shadow: 
+    inset 0 1px 0 0 #f4f4f4,
+    0 1px 0 0 #efefef,
+    0 1px 0 0 #ececec,
+    0 2px 0 0 #e0e0e0,
+    0 2px 0 0 #dedede,
+    0 3px 0 0 #dcdcdc,
+    0 4px 0 0 #cacaca,
+    inset -1px -1px -1px -1px #cecece;
+}
+
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .carousel-media {
-      max-width: 90%; /* Adjust the max width for smaller screens */
-      max-height: 90%; /* Adjust the max height for smaller screens */
+  .track {
+    flex-direction: row;
   }
-}
 
-@media (hover: none) {
-  .button-container {
-      display: none;
+  .slide {
+    width: 100vw; /* Full width on mobile */
+    padding: 10px;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .buttons {
+    display: none;
+    bottom: 20px;
+    gap: 12px;
+  }
+
+  figcaption {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    max-width: 90%;
   }
 }
