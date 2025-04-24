@@ -1,46 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A Bigger Circle - Making brands part of the conversation with audience intelligence">
     <title>A BIGGER CIRCLE</title>
-    <link rel="stylesheet" href="css/styles.css"/>
-    <link rel="stylesheet" href="css/carousel.css"/>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.ico">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" href="assets/favicon.ico">
   </head>
-     <body>
-      <header>
-        <h1 id="page-title" class="visually-hidden">A Bigger Circle</h1>
-      </header>
-      <main class="container">
-          <!-- Left Section -->
-        <section class="left">
-          <div class="inner-container">
-            <div class="left-text parallax" data-depth="0.8">
-              <img src="assets/logo.svg" alt="A Bigger Circle Logo" class="logo"/>
-              <p>WE'RE MAKING</p>
-              <p>CONVERSATION</p>
-              <p class="regular">Stay tuned for more</p>
-            </div>
-          </div>
-        </section>
-  
-        <!-- Right Section -->
-        <section class="right">
-          <div class="carousel-container">
-            <div class="carousel" id="content-carousel" data-lazy="true">
-              <div class="carousel-track" data-src="path/to/heavy-content.html"></div>
-            </div>
-            <div class="button-container"> 
-              <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
-              <button class="carousel-btn next" aria-label="Next slide">›</button>
-            </div>
-          </div>
-        
-        </section>
-      </main>
-    <!-- Scripts -->
-       <script type="module" src="js/carousel.js"></script>
-       <script src="js/parallax.js"></script>
-     </body>
+  <body>
+    <main class="container">
+      <section class="left" aria-labelledby="conversation-title">
+        <div class="inner-container">
+          <header>
+            <a href="index.html" aria-label="A Bigger Circle homepage">
+              <img src="assets/logo/ULTRAMARINE_Left.svg" alt="A Bigger Circle Logo" class="logo logo-desktop">
+              <img src="assets/logo/ULTRAMARINE_Center.svg" alt="A Bigger Circle Logo" class="logo logo-mobile">
+            </a>
+          </header>
+          <h1 id="main-title">We're making conversation</h1>
+            <nav aria-label="Social media links">
+              <nav class="social-nav">
+                <address class="location">
+                  <p>Pilotenstraat 39a, 1059CH Amsterdam</p>
+                </address>
+                <ul class="social-list">
+                  <li class="info-icon-item">
+                    <a href="/about" class="social-link info-icon" aria-label="More information about us">
+                      <img src="assets/icons-Ultramarine/info.svg" alt="">
+                    </a>
+                  </li>
+                  <li class="social-grid-container">
+                    <ul class="social-grid">
+                      <li><a href="https://tiktok.com/@abiggercircle" class="social-link" aria-label="TikTok"><img src="assets/icons-Ultramarine/tiktok.svg" alt=""></a></li>
+                      <li><a href="https://instagram.com/abiggercircle" class="social-link" aria-label="Instagram"><img src="assets/icons-Ultramarine/instagram.svg" alt=""></a></li>
+                      <li><a href="https://linkedin.com/company/abiggercircle" class="social-link" aria-label="LinkedIn"><img src="assets/icons-Ultramarine/linkedIn.svg" alt=""></a></li>
+                      <li><a href="mailto:contact@abiggercircle.com" class="social-link" aria-label="Email us"><img src="assets/icons-Ultramarine/email.svg" alt=""></a></li>
+                      <li><a href="https://x.com/abiggercircle" class="social-link" aria-label="notTwitter"><img src="assets/icons-Ultramarine/website.svg" alt=""></a></li>
+                      <li><a href="https://wa.me/1234567890" class="social-link" aria-label="WhatsApp"><img src="assets/icons-Ultramarine/whatsapp.svg" alt=""></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </nav>
+        </div>
+      </section>      
+
+      <section class="right">
+        <figure class="hero-image">
+          <img src="assets/mainimg.jpg" alt="Brand visual" loading="eager">
+          <figcaption>
+            <h2>We make brands part of the conversation</h2>
+            <p>
+              Using audience intelligence, we identify communities and help create connections,
+              engagement and growth through the art of making conversation.
+            </p>
+            <button class="read-more" id="readMoreBtn">Read more</button>
+          </figcaption>
+        </figure>
+        <nav class="nav-arrows" aria-label="Scroll navigation">
+          <button aria-label="Scroll up" id="scrollUp">↑</button>
+          <button aria-label="Scroll down" id="scrollDown">↓</button>
+        </nav>
+      </section>
+    </main>
+
+    <section class="more-content" id="moreContent">
+      <h2 class="visually-hidden">Additional Information</h2>
+      <div class="content-wrapper">
+        <button class="close-content" aria-label="Close content">&times;</button>
+        <a href="#contact" class="cta-button">Get in touch</a>
+      </div>
+    </section>
+
+    <script src="js/parallax.js"></script>
+    <script src="js/animation.js"></script>
+  </body>
 </html>
